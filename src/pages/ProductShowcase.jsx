@@ -103,7 +103,6 @@ const styles = {
     width: '100vw',
     height: '100vh',
     zIndex: 8,
-    pointerEvents: 'none',
   },
   layerLabels: {
     position: 'fixed',

@@ -1,7 +1,31 @@
-import React, { useRef, useMemo, useState } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, Environment, Float, Html, MeshTransmissionMaterial } from '@react-three/drei';
+import React, { useRef, useMemo, useState, Component } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Float, Html } from '@react-three/drei';
 import * as THREE from 'three';
+
+// ---------------------------------------------------------------------------
+// ErrorBoundary -- catches WebGL / Three.js errors
+// ---------------------------------------------------------------------------
+class CanvasErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: 'sans-serif', flexDirection: 'column', gap: 8 }}>
+          <p style={{ fontSize: 16, opacity: 0.7 }}>3D rendering unavailable</p>
+          <p style={{ fontSize: 12, opacity: 0.4 }}>{String(this.state.error?.message || '')}</p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Utility: linear interpolation
@@ -301,6 +325,7 @@ function CableScene({
         ...style,
       }}
     >
+      <CanvasErrorBoundary>
       <Canvas
         shadows
         dpr={[1, 2]}
@@ -322,8 +347,9 @@ function CableScene({
         {/* Lighting rig */}
         <Lighting />
 
-        {/* Environment for reflections */}
-        <Environment preset="city" environmentIntensity={0.5} />
+        {/* Fill light from front for reflections */}
+        <hemisphereLight args={['#b0c4de', '#1a1a2e', 0.6]} />
+        <pointLight position={[0, 5, 8]} intensity={1.0} color="#ffffff" distance={30} decay={2} />
 
         {/* Subtle floating motion when idle */}
         <Float
@@ -363,6 +389,7 @@ function CableScene({
           <shadowMaterial transparent opacity={0.15} />
         </mesh>
       </Canvas>
+      </CanvasErrorBoundary>
     </div>
   );
 }
