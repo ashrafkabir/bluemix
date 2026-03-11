@@ -1,0 +1,85 @@
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: #ffffff;
+  background-color: #0a0a0a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --purple: #8B5CF6;
+  --purple-light: #A855F7;
+  --purple-dark: #7C3AED;
+  --cyan: #06B6D4;
+  --cyan-light: #22D3EE;
+  --neon-green: #10B981;
+  --dark-bg: #0a0a0a;
+  --dark-surface: #141414;
+  --dark-card: #1a1a1a;
+  --dark-border: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
+}
+
+a {
+  font-weight: 500;
+  color: var(--purple);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--purple-light);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--dark-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid var(--dark-border);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--dark-card);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+button:hover {
+  border-color: var(--purple);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+input, select, textarea {
+  background: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 0.6em 1em;
+  font-family: inherit;
+  font-size: 0.95em;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
